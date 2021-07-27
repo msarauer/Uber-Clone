@@ -1,25 +1,45 @@
-import React, {useState} from 'react';
-import {View, TextInput, SafeAreaView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, SafeAreaView} from 'react-native';
 import styles from './styles';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import {GOOGLE_PLACES_API} from '@env';
 
 export default function DestinationSearch() {
-  const [fromText, setFromText] = useState('');
-  const [destinationText, setDestinationText] = useState('');
+  const [originPlace, setOriginPlace] = useState('');
+  const [destinationPlace, setDestinationPlace] = useState('');
+
+  useEffect(() => {
+    if (originPlace && destinationPlace) {
+      console.warn('you are here');
+    }
+  }, [originPlace, destinationPlace]);
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <TextInput
-          value={fromText}
-          onChangeText={setFromText}
-          style={styles.textInput}
-          placeholder="From"
+        <GooglePlacesAutocomplete
+          placeholder="Where From"
+          styles={{textInput: styles.textInput}}
+          onPress={(data, details = null) => {
+            setOriginPlace({data, details});
+          }}
+          fetchDetails
+          query={{
+            key: GOOGLE_PLACES_API,
+            language: 'en',
+          }}
         />
-        <TextInput
-          value={destinationText}
-          onChangeText={setDestinationText}
-          style={styles.textInput}
+        <GooglePlacesAutocomplete
           placeholder="Where to?"
+          styles={{textInput: styles.textInput}}
+          onPress={(data, details = null) => {
+            setDestinationPlace({data, details});
+          }}
+          fetchDetails
+          query={{
+            key: GOOGLE_PLACES_API,
+            language: 'en',
+          }}
         />
       </View>
     </SafeAreaView>
