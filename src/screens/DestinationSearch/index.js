@@ -4,8 +4,11 @@ import styles from './styles';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {GOOGLE_PLACES_API} from '@env';
 import PlaceRow from './PlaceRow';
+import {useNavigation} from '@react-navigation/native';
 
 export default function DestinationSearch() {
+  const navigation = useNavigation();
+
   const [originPlace, setOriginPlace] = useState('');
   const [destinationPlace, setDestinationPlace] = useState('');
 
@@ -18,10 +21,17 @@ export default function DestinationSearch() {
     geometry: {location: {lat: 48.8496818, lng: 2.2940881}},
   };
 
-  useEffect(() => {
+  const checkNavigation = () => {
     if (originPlace && destinationPlace) {
-      console.warn('you are here');
+      navigation.navigate('SearchResults', {
+        originPlace,
+        destinationPlace,
+      });
     }
+  };
+
+  useEffect(() => {
+    checkNavigation();
   }, [originPlace, destinationPlace]);
 
   return (

@@ -11,7 +11,7 @@ export default function UberTypes() {
   return (
     <View>
       {typesData.map(type => {
-        return <UberTypeRow type={type} />;
+        return <UberTypeRow type={type} key={type.id} />;
       })}
       <Pressable
         onPress={confirm}
