@@ -24,7 +24,7 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <DestinationSearch />
+      <HomeScreen />
     </>
   );
 };

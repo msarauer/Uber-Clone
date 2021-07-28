@@ -17,6 +17,7 @@ export default function RouteMap() {
   return (
     <MapView
       style={{height: '100%', width: '100%'}}
+      showsUserLocation={true}
       initialRegion={{
         latitude: 28.450627,
         longitude: -16.263045,
