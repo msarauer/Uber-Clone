@@ -3,6 +3,7 @@ import {View, SafeAreaView} from 'react-native';
 import styles from './styles';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {GOOGLE_PLACES_API} from '@env';
+import PlaceRow from './PlaceRow';
 
 export default function DestinationSearch() {
   const [originPlace, setOriginPlace] = useState('');
@@ -18,8 +19,13 @@ export default function DestinationSearch() {
     <SafeAreaView>
       <View style={styles.container}>
         <GooglePlacesAutocomplete
+          enablePoweredByContainer={false}
           placeholder="Where From"
-          styles={{textInput: styles.textInput}}
+          styles={{
+            textInput: styles.textInput,
+            container: {...styles.autoCompleteContainer, top: 0},
+            listView: styles.listView,
+          }}
           onPress={(data, details = null) => {
             setOriginPlace({data, details});
           }}
@@ -28,10 +34,15 @@ export default function DestinationSearch() {
             key: GOOGLE_PLACES_API,
             language: 'en',
           }}
+          renderRow={data => <PlaceRow data={data} />}
         />
         <GooglePlacesAutocomplete
+          enablePoweredByContainer={false}
           placeholder="Where to?"
-          styles={{textInput: styles.textInput}}
+          styles={{
+            textInput: styles.textInput,
+            container: styles.autoCompleteContainer,
+          }}
           onPress={(data, details = null) => {
             setDestinationPlace({data, details});
           }}
@@ -40,6 +51,7 @@ export default function DestinationSearch() {
             key: GOOGLE_PLACES_API,
             language: 'en',
           }}
+          renderRow={data => <PlaceRow data={data} />}
         />
       </View>
     </SafeAreaView>
