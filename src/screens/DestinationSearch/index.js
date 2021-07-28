@@ -53,6 +53,12 @@ export default function DestinationSearch() {
           }}
           renderRow={data => <PlaceRow data={data} />}
         />
+        {/* Circle near origin input */}
+        <View style={styles.circle}></View>
+        {/* Line between dots */}
+        <View style={styles.line}></View>
+        {/* Square below line */}
+        <View style={styles.square}></View>
       </View>
     </SafeAreaView>
   );
