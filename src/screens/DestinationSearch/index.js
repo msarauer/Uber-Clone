@@ -9,6 +9,15 @@ export default function DestinationSearch() {
   const [originPlace, setOriginPlace] = useState('');
   const [destinationPlace, setDestinationPlace] = useState('');
 
+  const homePlace = {
+    description: 'Home',
+    geometry: {location: {lat: 48.8152937, lng: 2.4597668}},
+  };
+  const workPlace = {
+    description: 'Work',
+    geometry: {location: {lat: 48.8496818, lng: 2.2940881}},
+  };
+
   useEffect(() => {
     if (originPlace && destinationPlace) {
       console.warn('you are here');
@@ -19,8 +28,11 @@ export default function DestinationSearch() {
     <SafeAreaView>
       <View style={styles.container}>
         <GooglePlacesAutocomplete
+          currentLocation={true}
+          currentLocationLabel="Current Location"
           enablePoweredByContainer={false}
           placeholder="Where From"
+          predefinedPlaces={[homePlace, workPlace]}
           styles={{
             textInput: styles.textInput,
             container: {...styles.autoCompleteContainer, top: 0},
@@ -35,6 +47,7 @@ export default function DestinationSearch() {
             language: 'en',
           }}
           renderRow={data => <PlaceRow data={data} />}
+          renderDescription={data => data.description || data.vicinity}
         />
         <GooglePlacesAutocomplete
           enablePoweredByContainer={false}
