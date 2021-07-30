@@ -6,10 +6,12 @@ import {useRoute} from '@react-navigation/native';
 
 export default function SearchResults() {
   const route = useRoute();
+  const {originPlace, destinationPlace} = route.params;
+
   return (
     <View>
       <View style={{height: Dimensions.get('window').height - 400}}>
-        <RouteMap />
+        <RouteMap origin={originPlace} destination={destinationPlace} />
       </View>
       <View style={{height: 400}}>
         <UberTypes />

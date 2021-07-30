@@ -3,15 +3,14 @@ import MapView, {Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {GOOGLE_PLACES_API} from '@env';
 
-export default function RouteMap() {
-  const origin = {
-    latitude: 28.450627,
-    longitude: -16.263045,
+export default function RouteMap({origin, destination}) {
+  const originLoc = {
+    latitude: origin.details.geometry.location.lat,
+    longitude: destination.details.geometry.location.lat,
   };
-
-  const destination = {
-    latitude: 28.460127,
-    longitude: -16.269045,
+  const destinationLoc = {
+    latitude: destination.details.geometry.location.lat,
+    longitude: destination.details.geometry.location.lng,
   };
 
   return (
@@ -27,8 +26,8 @@ export default function RouteMap() {
       <Marker coordinate={origin} title={'Origin'} />
       <Marker coordinate={destination} title={'Destination'} />
       <MapViewDirections
-        origin={origin}
-        destination={destination}
+        origin={originLoc}
+        destination={destinationLoc}
         apikey={GOOGLE_PLACES_API}
         strokeWidth={5}
       />
