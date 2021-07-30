@@ -16,8 +16,8 @@ export default function HomeMap() {
       style={{height: '100%', width: '100%'}}
       showsUserLocation={true}
       initialRegion={{
-        latitude: 28.450627,
-        longitude: -16.263045,
+        latitude: 51.1918,
+        longitude: -114.4667,
         latitudeDelta: 0.0222,
         longitudeDelta: 0.0121,
       }}>
