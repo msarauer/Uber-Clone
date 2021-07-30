@@ -9,7 +9,7 @@ import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 
-import Router from './src/navigation/root';
+import Router from './src/navigation/Root';
 import Geolocation from '@react-native-community/geolocation';
 
 navigator.geolocation = require('@react-native-community/geolocation');
